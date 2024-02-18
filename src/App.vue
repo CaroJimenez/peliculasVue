@@ -17,6 +17,7 @@
           style="max-width: 20rem"
           class="mb-2"
         >
+          <img :src="movie.urlImage" class="card-img-top" alt="..." />
           <b-card-text> {{ movie.duration }} minutos </b-card-text>
           <b-card-text>Director: {{ movie.director }} </b-card-text>
           <b-card-text>Género: {{ movie.gender }} </b-card-text>
@@ -181,12 +182,15 @@
                 required
               ></b-form-input>
             </b-form-group>
-            <b-button
-              type="submit"
-              variant="primary"
-              @click="$bvModal.hide('modal-1')"
-              >Registrar</b-button
-            >
+            <!--Imagen-->
+            <b-form-group id="file" label-for="file">
+              <b-form-file
+                v-model="file"
+                :state="Boolean(file)"
+                placeholder="Selecciona una imagen"
+              ></b-form-file>
+            </b-form-group>
+            <b-button type="submit" variant="primary">Registrar</b-button>
           </b-form>
         </div>
         <b-button class="mt-3" block @click="$bvModal.hide('modal-1')"
@@ -197,7 +201,6 @@
   </div>
 </template>
 <script>
-import { get } from "lodash";
 import {
   postMovie,
   getMovies,
@@ -221,6 +224,7 @@ export default Vue.extend({
       director: "",
       category: "",
       publishDate: "",
+      file: null,
       loading: false,
       categoryOptions: ["Infantil", "Adolescente", "Adulto"],
       genderOptions: [
@@ -293,16 +297,19 @@ export default Vue.extend({
       if (Object.keys(this.errors).length === 0) {
         try {
           this.loading = true;
+          this.$bvModal.hide("modal-1");
           await postMovie(
             this.name,
             this.duration,
             this.gender,
             this.director,
             this.category,
-            this.publishDate
+            this.publishDate,
+            this.file
           );
           await this.fetchMovies();
         } finally {
+          this.$bvModal.hide("modal-1");
           this.loading = false;
           this.name = "";
           this.duration = "";
@@ -310,6 +317,7 @@ export default Vue.extend({
           this.director = "";
           this.category = "";
           this.publishDate = "";
+          this.file = null;
         }
       }
     },
@@ -354,7 +362,6 @@ export default Vue.extend({
 .moviesContainer {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
   margin: 3%;
 }
 .cardContainer {

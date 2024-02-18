@@ -9,7 +9,8 @@ export async function postMovie(
   gender,
   director,
   category,
-  publishDate
+  publishDate,
+  file
 ) {
   const data = {
     name,
@@ -18,25 +19,22 @@ export async function postMovie(
     director,
     category,
     publishDate,
+    urlImage: "1",
   };
 
-  console.log("data", data);
-  const options = {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(data),
-  };
+  const fd = new FormData();
+  fd.append(
+    "movieRequestDTO",
+    new Blob([JSON.stringify(data)], { type: "application/json" })
+  );
+
+  fd.append("file", file);
+
   try {
-    const response = await fetch(POST_URL, options);
-    if (!response.ok) {
-      throw new Error("Error al enviar los datos");
-    }
-    const responseData = await response.json();
-    console.log("Respuesta del servidor:", responseData);
+    const response = await axios.post(POST_URL, fd);
+    return response.data;
   } catch (error) {
-    console.error("Error:", error);
+    throw error;
   }
 }
 

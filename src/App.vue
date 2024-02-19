@@ -5,10 +5,8 @@
     <div class="buttonContainer">
       <div class="searchBarContainer">
         <SearchBar @search="handleSearch" />
-        <p>Última búsqueda: {{ lastSearch }}</p>
       </div>
       <div class="searchBarContainer">
-        <b-button variant="primary" v-b-modal.modal-1>Add movie here</b-button>
         <AddMovie @loading-changed="updateLoading" @movie-added="fetchMovies" />
       </div>
     </div>
@@ -103,7 +101,7 @@ import Vue from "vue";
 import LoadingOverlay from "vue-loading-overlay";
 import "vue-loading-overlay/dist/vue-loading.css";
 import SearchBar from "./components/SearchBar.vue";
-import AddMovie from "./components/AddMovie.vue";
+import AddMovie from "@/components/AddMovie.vue";
 
 export default Vue.extend({
   components: {
@@ -156,7 +154,11 @@ export default Vue.extend({
       this.loading = newValue;
     },
     handleSearch(searchQuery) {
-      this.lastSearch = searchQuery;
+      if (searchQuery.length === 0) {
+        this.fetchMovies();
+      } else {
+        this.movies = searchQuery;
+      }
     },
     async deleteMovieById(id) {
       try {

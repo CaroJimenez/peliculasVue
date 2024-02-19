@@ -1,8 +1,8 @@
 <template>
   <div>
-    <b-button @click="openModal">Open Modal</b-button>
+    <b-button variant="primary" @click="openModal">Nueva película</b-button>
 
-    <b-modal v-model="showModal" title="Add Movie">
+    <b-modal v-model="showModal" title="Nueva película" hide-footer>
       <b-form @submit.prevent="submitForm">
         <b-form-group
           id="name"

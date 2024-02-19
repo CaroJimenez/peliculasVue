@@ -76,3 +76,43 @@ export async function getMovieById(id) {
     throw error;
   }
 }
+
+export async function getMoviesByOption(option, value) {
+  if (option === "Nombre") {
+    try {
+      const response = await axios.get(`${GET_URL}name`, {
+        params: {
+          name: value,
+        },
+      });
+      return response.data.results;
+    } catch (error) {
+      throw error;
+    }
+  }
+  if (option === "Director") {
+    try {
+      const response = await axios.get(`${GET_URL}director`, {
+        params: {
+          director: value,
+        },
+      });
+      return response.data.results;
+    } catch (error) {
+      throw error;
+    }
+  }
+  if (option === "Género o categoría") {
+    try {
+      const response = await axios.get(`${GET_URL}searchByGenderOrCategory`, {
+        params: {
+          gender: value,
+          category: value,
+        },
+      });
+      return response.data.results;
+    } catch (error) {
+      throw error;
+    }
+  }
+}

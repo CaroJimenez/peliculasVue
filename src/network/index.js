@@ -21,6 +21,7 @@ export async function postMovie(
     publishDate,
     urlImage: "1",
   };
+  console.log("data", data);
 
   const fd = new FormData();
   fd.append(

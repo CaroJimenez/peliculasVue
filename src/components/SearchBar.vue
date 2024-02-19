@@ -34,6 +34,16 @@
             placeholder="Buscar por género/categoría..."
             @input="updateSearchQuery"
           />
+
+          <div v-if="selected === 'Fecha de publicación'" class="dates">
+            <b-form-group label="Desde...">
+              <input type="date" class="form-control" v-model="date1" />
+            </b-form-group>
+
+            <b-form-group label="Hasta...">
+              <input type="date" class="form-control" v-model="date2"
+            /></b-form-group>
+          </div>
         </div>
       </div>
 
@@ -47,11 +57,17 @@
 </template>
 
 <script>
-import { getMoviesByOption } from "../network/index";
+import {
+  getMoviesByOption,
+  getMoviesByDate,
+  getMoviesByDescending,
+} from "../network/index";
 export default {
   data() {
     return {
       searchQuery: "",
+      date1: null,
+      date2: null,
       selected: null,
       options: [
         { text: "Buscar por:", value: null, disabled: true },
@@ -59,17 +75,22 @@ export default {
         "Nombre",
         "Director",
         "Género o categoría",
+        "Fecha de forma descendente",
       ],
       movies: [],
     };
   },
   methods: {
     async search() {
-      try {
+      if (this.selected === "Fecha de publicación") {
+        this.movies = await getMoviesByDate(this.date1, this.date2);
+        this.$emit("search", this.movies);
+      } else if (this.selected === "Fecha de forma descendente") {
+        this.movies = await getMoviesByDescending();
+        this.$emit("search", this.movies);
+      } else {
         this.movies = await getMoviesByOption(this.selected, this.searchQuery);
         this.$emit("search", this.movies);
-      } catch (error) {
-        console.error(error);
       }
     },
     updateSearchQuery() {
@@ -91,5 +112,9 @@ export default {
 
 .optionsContainer {
   padding-right: 10px;
+}
+.dates {
+  display: flex;
+  flex-direction: row;
 }
 </style>

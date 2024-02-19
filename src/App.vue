@@ -154,11 +154,7 @@ export default Vue.extend({
       this.loading = newValue;
     },
     handleSearch(searchQuery) {
-      if (searchQuery.length === 0) {
-        this.fetchMovies();
-      } else {
-        this.movies = searchQuery;
-      }
+      this.movies = searchQuery;
     },
     async deleteMovieById(id) {
       try {

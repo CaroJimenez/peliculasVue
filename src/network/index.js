@@ -76,6 +76,27 @@ export async function getMovieById(id) {
     throw error;
   }
 }
+export async function getMoviesByDate(date1, date2) {
+  try {
+    const response = await axios.get(`${GET_URL}publishDate`, {
+      params: {
+        publishDate: date1,
+        publishDate2: date2,
+      },
+    });
+    return response.data.results;
+  } catch (error) {
+    throw error;
+  }
+}
+export async function getMoviesByDescending() {
+  try {
+    const response = await axios.get(`${GET_URL}publishDateDesc`);
+    return response.data.results;
+  } catch (error) {
+    throw error;
+  }
+}
 
 export async function getMoviesByOption(option, value) {
   if (option === "Nombre") {

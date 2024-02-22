@@ -2,6 +2,11 @@
 # yarn lockfile v1
 
 
+"@asika32764/vue-animate@^3.0.2":
+  version "3.0.2"
+  resolved "https://registry.npmjs.org/@asika32764/vue-animate/-/vue-animate-3.0.2.tgz"
+  integrity sha512-VHfFDTVarHCvDlICgRl+4zOu0StstATMvr1dsPPxnfIefBIQFfxOCXtNu0xiNUMI4wPzhnaJIuRCYwT46PFpVw==
+
 "@babel/parser@^7.23.5":
   version "7.23.9"
   resolved "https://registry.npmjs.org/@babel/parser/-/parser-7.23.9.tgz"
@@ -446,10 +451,10 @@ vue-loading-overlay@3.0:
   resolved "https://registry.npmjs.org/vue-loading-overlay/-/vue-loading-overlay-3.0.1.tgz"
   integrity sha512-1y7Yghbb8SFw0DzMVz6tVKUz7wvsmWw+78mKQ148ZWDfGroX86wCUmsurx4BxNggziVfWWGvS0QexpwkmdSMgw==
 
-vue-router@^2.8.1:
-  version "2.8.1"
-  resolved "https://registry.npmjs.org/vue-router/-/vue-router-2.8.1.tgz"
-  integrity sha512-MC4jacHBhTPKtmcfzvaj2N7g6jgJ/Z/eIjZdt+yUaUOM1iKC0OUIlO/xCtz6OZFFTNUJs/1YNro2GN/lE+nOXA==
+vue-router@^3.6.5:
+  version "3.6.5"
+  resolved "https://registry.npmjs.org/vue-router/-/vue-router-3.6.5.tgz"
+  integrity sha512-VYXZQLtjuvKxxcshuRAwjHnciqZVoXAjTjcqBTz4rKc8qih9g9pI3hbDjmqXaHdgL3v8pV6P8Z335XvHzESxLQ==
 
 vue@^2.0.0, vue@^2.5.18, vue@^2.7.0-0, vue@^2.7.16:
   version "2.7.16"
